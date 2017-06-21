@@ -1,0 +1,6 @@
+rootProject.name = 'example'
+
+include ':smart-space-floor-map'
+project(':smart-space-floor-map').projectDir = new File(rootProject.projectDir, '../node_modules/smart-space-floor-map/android/release')
+
+include ':app'

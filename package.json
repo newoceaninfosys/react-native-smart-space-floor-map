@@ -1,0 +1,26 @@
+{
+  "name": "smart-space-floor-map",
+  "version": "0.0.8",
+  "description": "A floor map module for Smart Space App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sriraman/react-native-shared-preferences.git"
+  },
+  "keywords": [
+    "React",
+    "Native",
+    "Android",
+    "react-component",
+    "react-native"
+  ],
+  "author": "Shawn Dao <sang.dao@newoceaninfosys.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sriraman/react-native-shared-preferences/issues"
+  },
+  "homepage": "https://github.com/sriraman/react-native-shared-preferences#readme"
+}
