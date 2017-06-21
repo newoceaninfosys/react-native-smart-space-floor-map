@@ -1,13 +1,12 @@
 package com.south32.oraclecms.floormap;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
+import android.net.Uri;
 
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.annotations.ReactProp;
+
+import java.io.File;
 
 public class CustomViewManager extends SimpleViewManager<CustomZoom> {
     @Override
@@ -16,11 +15,15 @@ public class CustomViewManager extends SimpleViewManager<CustomZoom> {
     }
 
     @Override
-    protected CustomZoom createViewInstance(ThemedReactContext context){
+    protected CustomZoom createViewInstance(ThemedReactContext context) {
         CustomZoom zoom = new CustomZoom(context);
-//        Bitmap bitmap = drawOnImage(R.mipmap.sample);
         zoom.setImageResource(R.mipmap.sample);
         return zoom;
+    }
+
+    @ReactProp(name = "uri")
+    public void setUri(CustomZoom zoom, String src) {
+        zoom.setImageURI(Uri.fromFile(new File(src)));
     }
 
 //    private Bitmap drawOnImage(int drawableId) {

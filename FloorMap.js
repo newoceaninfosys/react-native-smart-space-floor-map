@@ -12,6 +12,7 @@ import { requireNativeComponent, View } from 'react-native';
 var iface = {
 	name: 'FloorMap',
 	propTypes: {
+		uri: PropTypes.string,
 		...View.propTypes // include the default view properties
 	}
 };

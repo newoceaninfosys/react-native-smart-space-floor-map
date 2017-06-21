@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
 
         imageView = (CustomZoom) findViewById(R.id.imageView);
         imageView.setImageResource(R.mipmap.sample);
-        
+
 //        Bitmap bitmap = drawOnImage(R.mipmap.sample);
 //        imageView.setImageBitmap(bitmap);
     }
