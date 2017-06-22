@@ -37,6 +37,7 @@ public class CustomViewManager extends SimpleViewManager<CustomZoom> {
     private Canvas _canvas;
     private String _activeColor = "#ff0000";
     private int _radius = 1;
+    private int _strokeWidth = 5;
 
     private void _drawDesks(CustomZoom zoom) {
         _copyBm = _buffer.copy(Bitmap.Config.ARGB_8888, true);
@@ -82,12 +83,16 @@ public class CustomViewManager extends SimpleViewManager<CustomZoom> {
                 }
 
                 if (_activeDesk != null && activeDeskX == x && activeDeskY == y) {
-                    this._paint.setColor(Color.parseColor(_activeColor));
-                    this._paint.setStrokeWidth(2);
-                } else {
-                    this._paint.setColor(Color.parseColor(color));
-                    this._paint.setStrokeWidth(0);
+                    // Draw the stroke
+                    Paint strokeP = new Paint();
+                    strokeP.setStyle(Paint.Style.STROKE);
+                    strokeP.setColor(Color.parseColor(_activeColor));
+                    strokeP.setStrokeWidth(_strokeWidth);
+                    strokeP.setStrokeCap(Paint.Cap.ROUND);
+                    this._canvas.drawCircle(x, y, this._radius, strokeP);
                 }
+
+                this._paint.setColor(Color.parseColor(color));
 
                 this._canvas.drawCircle(x, y, this._radius, this._paint);
             }
@@ -185,6 +190,12 @@ public class CustomViewManager extends SimpleViewManager<CustomZoom> {
     @ReactProp(name = "radius")
     public void setRadius(CustomZoom zoom, int radius) {
         _radius = radius;
+        this._drawDesks(zoom);
+    }
+
+    @ReactProp(name = "strokeWidth")
+    public void setStrokeWidth(CustomZoom zoom, int strokeWidth) {
+        _strokeWidth = strokeWidth;
         this._drawDesks(zoom);
     }
 
