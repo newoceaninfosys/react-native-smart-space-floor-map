@@ -36,9 +36,12 @@ public class CustomViewManager extends SimpleViewManager<CustomZoom> {
     private Paint _paint;
     private Canvas _canvas;
     private String _activeColor = "#ff0000";
-    private int _radius = 20;
+    private int _radius = 1;
 
     private void _drawDesks(CustomZoom zoom) {
+        _copyBm = _buffer.copy(Bitmap.Config.ARGB_8888, true);
+        _canvas = new Canvas(_copyBm);
+
         float activeDeskX = 0.0f, activeDeskY = 0.0f;
         if (_activeDesk != null) {
             try {
@@ -80,8 +83,10 @@ public class CustomViewManager extends SimpleViewManager<CustomZoom> {
 
                 if (_activeDesk != null && activeDeskX == x && activeDeskY == y) {
                     this._paint.setColor(Color.parseColor(_activeColor));
+                    this._paint.setStrokeWidth(2);
                 } else {
                     this._paint.setColor(Color.parseColor(color));
+                    this._paint.setStrokeWidth(0);
                 }
 
                 this._canvas.drawCircle(x, y, this._radius, this._paint);
@@ -169,9 +174,6 @@ public class CustomViewManager extends SimpleViewManager<CustomZoom> {
         _uri = uri;
         _URI = Uri.fromFile(new File(_uri.substring(7)));
         _buffer = BitmapFactory.decodeFile(_uri.substring(7));
-        _copyBm = _buffer.copy(Bitmap.Config.ARGB_8888, true);
-        _canvas = new Canvas(_copyBm);
-        zoom.setImageBitmap(_copyBm);
         this._drawDesks(zoom);
     }
 

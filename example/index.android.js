@@ -64,9 +64,9 @@ export default class example extends Component {
   renderFloorMap(){
     const { uri } = this.state;
    if(uri && uri.length > 0){
-    return <FloorMap activeDesk={this.state.activeDesk} desks={[
+    return <FloorMap radius={15} activeDesk={this.state.activeDesk} desks={[
       {x: 100, y: 100, color: '#000000'}, {x: 200, y: 200, color: '#00ff00'}, {x: 300, y: 300, color: '#0000ff'}, {x: 400, y: 400}
-      ]} uri={uri} style={{height: 100, width: 400, backgroundColor: '#e5e5e5'}} />
+      ]} uri={uri} style={{height: 500, width: 400, backgroundColor: '#e5e5e5'}} />
    }
    return null;
   }

@@ -15,6 +15,7 @@ var iface = {
 		uri: PropTypes.string,
 		maxZoom: PropTypes.number,
 		radius: PropTypes.number,
+		strokeWidth: PropTypes.number,
 		desks: PropTypes.array,
 		activeDesk: PropTypes.object,
 		activeColor: PropTypes.string,
