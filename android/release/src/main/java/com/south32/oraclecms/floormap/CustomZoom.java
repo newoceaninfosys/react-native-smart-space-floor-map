@@ -16,7 +16,14 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.ImageView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.FileOutputStream;
+
+interface MyTouchHandler {
+    void onTouch(JSONObject obj);
+}
 
 public class CustomZoom extends ImageView {
 
@@ -47,6 +54,8 @@ public class CustomZoom extends ImageView {
 
     Context context;
 
+    MyTouchHandler myTouchHandler;
+
     public CustomZoom(Context context) {
         super(context);
         sharedConstructing(context);
@@ -58,9 +67,16 @@ public class CustomZoom extends ImageView {
     }
 
     public boolean performClick(MotionEvent event) {
+        Log.i("performClick", "CLICKED " + event.getX() + " - " + event.getY());
         super.performClick();
-        float coorXTouch = ((event.getX() - m[2]) / m[0]);
-        float coorYTouch = ((event.getY() - m[5]) / m[4]);
+        double coorXTouch = ((event.getX() - m[2]) / m[0]);
+        double coorYTouch = ((event.getY() - m[5]) / m[4]);
+        JSONObject coor = new JSONObject();
+        try{coor.put("x", coorXTouch);}catch(Exception e){Log.i("Assign X", e.getMessage());}
+        try{coor.put("y", coorYTouch);}catch(Exception e){Log.i("Assign Y", e.getMessage());}
+        Log.i("coor x pos", coorXTouch+"");
+        Log.i("coor Y pos", coorYTouch+"");
+        this.myTouchHandler.onTouch(coor);
         return true;
     }
 
@@ -81,7 +97,7 @@ public class CustomZoom extends ImageView {
 
 //                int touchX = (int) event.getX();
 //                int touchY = (int) event.getY();
-//                Log.d("aaaaa", "x: " + touchX + ", y: " + touchY + ", Action: "+ event.getAction());
+//                Log.i("aaaaa", "x: " + touchX + ", y: " + touchY + ", Action: "+ event.getAction());
 
                 PointF curr = new PointF(event.getX(), event.getY());
 
@@ -110,8 +126,9 @@ public class CustomZoom extends ImageView {
                         mode = NONE;
                         int xDiff = (int) Math.abs(curr.x - start.x);
                         int yDiff = (int) Math.abs(curr.y - start.y);
-                        if (xDiff < CLICK && yDiff < CLICK)
+                        if (xDiff < CLICK && yDiff < CLICK) {
                             performClick(event);
+                        }
                         break;
 
                     case MotionEvent.ACTION_POINTER_UP:
@@ -125,6 +142,10 @@ public class CustomZoom extends ImageView {
             }
 
         });
+    }
+
+    public void setMyTouchHandler(MyTouchHandler handler){
+        myTouchHandler = handler;
     }
 
     public void setMaxZoom(float x) {
@@ -232,7 +253,7 @@ public class CustomZoom extends ImageView {
             int bmWidth = drawable.getIntrinsicWidth();
             int bmHeight = drawable.getIntrinsicHeight();
 
-            Log.d("bmSize", "bmWidth: " + bmWidth + " bmHeight : " + bmHeight);
+            Log.i("bmSize", "bmWidth: " + bmWidth + " bmHeight : " + bmHeight);
 
             float scaleX = (float) viewWidth / (float) bmWidth;
             float scaleY = (float) viewHeight / (float) bmHeight;
@@ -243,8 +264,8 @@ public class CustomZoom extends ImageView {
             float bmScaleHeight = (scale * (float) bmHeight);
             float bmViewTopLeftXPost = (((float) viewWidth - bmScaleWidth) / 2);
 
-            Log.d("View size", "Width: " + viewWidth + ", Height: " + viewHeight);
-            Log.d("Image Scale size", "Width: " + bmScaleWidth + ", Height: " + bmScaleHeight);
+            Log.i("View size", "Width: " + viewWidth + ", Height: " + viewHeight);
+            Log.i("Image Scale size", "Width: " + bmScaleWidth + ", Height: " + bmScaleHeight);
 
             // Center the image
             float redundantYSpace = (float) viewHeight - bmScaleHeight;
@@ -292,7 +313,7 @@ public class CustomZoom extends ImageView {
             fos = new FileOutputStream("myphoto.png");
             b.compress(Bitmap.CompressFormat.PNG, 95, fos);
         } catch (Exception e) {
-            Log.d("a", e.getLocalizedMessage());
+            Log.i("a", e.getLocalizedMessage());
             e.printStackTrace();
         }
     }

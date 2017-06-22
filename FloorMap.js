@@ -13,6 +13,11 @@ var iface = {
 	name: 'FloorMap',
 	propTypes: {
 		uri: PropTypes.string,
+		maxZoom: PropTypes.number,
+		radius: PropTypes.number,
+		desks: PropTypes.array,
+		activeDesk: PropTypes.object,
+		activeColor: PropTypes.string,
 		...View.propTypes // include the default view properties
 	}
 };

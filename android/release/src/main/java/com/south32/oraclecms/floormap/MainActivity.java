@@ -16,8 +16,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_layout);
 
-        imageView = (CustomZoom) findViewById(R.id.imageView);
-        imageView.setImageResource(R.mipmap.sample);
+//        imageView = (CustomZoom) findViewById(R.id.imageView);
+//        imageView.setImageResource(R.mipmap.sample);
 
 //        Bitmap bitmap = drawOnImage(R.mipmap.sample);
 //        imageView.setImageBitmap(bitmap);

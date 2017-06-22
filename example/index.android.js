@@ -10,7 +10,9 @@ import {
   StyleSheet,
   Text,
   View,
-  Platform
+  Platform,
+  TouchableOpacity,
+  DeviceEventEmitter
 } from 'react-native';
 
 import RNFetchBlob from 'react-native-fetch-blob'
@@ -22,8 +24,16 @@ export default class example extends Component {
     console.log('123');
 
     this.state = {
-      uri: ''
+      uri: '',
+      activeDesk: null
     }
+  }
+
+  componentWillMount(){
+    console.log('componentWillMount')
+    DeviceEventEmitter.addListener('FloorMapOnSelect', (e: Event)=>{
+      console.log('FloorMapOnSelect', e);
+    });
   }
 
   componentDidMount(){
@@ -33,7 +43,7 @@ export default class example extends Component {
         // by adding this option, the temp files will have a file extension
         // appendExt : 'png'
       })
-      .fetch('GET', 'http://s1.picswalls.com/wallpapers/2016/03/29/beautiful-nature-wallpaper_042325903_304.jpg', {
+      .fetch('GET', 'http://nois.newoceaninfosys.com:44411/media/73738b977efb4f1bbdc6372bfade4ed5-lg-1.jpg', {
         //some headers ..
       })
       .then((res) => {
@@ -44,31 +54,56 @@ export default class example extends Component {
         this.setState({
           uri: Platform.OS === 'android' ? 'file://' + res.path()  : '' + res.path()
         });
-      })
+      });
+
+      setTimeout(()=>{
+        this.setState({activeDesk: {x: 200, y: 200, color: '#00ff00'} });
+      }, 5000);
   }
 
   renderFloorMap(){
     const { uri } = this.state;
    if(uri && uri.length > 0){
-    return <FloorMap uri={uri} style={{flex: 1, height: 100, width: 400, backgroundColor: '#e5e5e5'}} />
+    return <FloorMap activeDesk={this.state.activeDesk} desks={[
+      {x: 100, y: 100, color: '#000000'}, {x: 200, y: 200, color: '#00ff00'}, {x: 300, y: 300, color: '#0000ff'}, {x: 400, y: 400}
+      ]} uri={uri} style={{height: 100, width: 400, backgroundColor: '#e5e5e5'}} />
    }
    return null;
+  }
+
+  changeImage(){
+    console.log('Load new image');
+    RNFetchBlob
+      .config({
+        fileCache : true,
+        // by adding this option, the temp files will have a file extension
+        // appendExt : 'png'
+      })
+      .fetch('GET', "https://south32smartspace.oraclecms.com/media/1ffbc41a344c4949887736025f4c3f08-original-1.jpg", {
+        //some headers ..
+      })
+      .then((res) => {
+        // the temp file path with file extension `png`
+        console.log('The file saved to ', res.path())
+        // Beware that when using a file path as Image source on Android,
+        // you must prepend "file://"" before the file path
+        this.setState({
+          uri: Platform.OS === 'android' ? 'file://' + res.path()  : '' + res.path()
+        });
+      });
   }
 
   render() {
     return (
       <View style={styles.container}>
         {this.renderFloorMap()}
-        <Text style={styles.welcome}>
-          Welcome to React Native! 123
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+        <TouchableOpacity 
+          style={{height: 40, marginTop: 20, marginBottom: 20}}
+          onPress={()=>{
+              this.changeImage();
+          }}>
+        <Text>Change Picture</Text>
+        </TouchableOpacity>
       </View>
     );
   }
