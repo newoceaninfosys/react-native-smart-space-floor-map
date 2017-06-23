@@ -221,7 +221,11 @@ public class CustomViewManager extends SimpleViewManager<CustomZoom> {
     @ReactProp(name = "activeDesk")
     public void setActiveDesk(CustomZoom zoom, ReadableMap desk) {
         try {
-            _activeDesk = MapUtil.toJSONObject(desk);
+            if (desk != null) {
+                _activeDesk = MapUtil.toJSONObject(desk);
+            } else {
+                _activeDesk = null;
+            }
         } catch (Exception e) {
             Log.i("Parse ActiveDesk Error", e.getMessage());
         }
