@@ -19,6 +19,7 @@ var iface = {
 		desks: PropTypes.array,
 		activeDesk: PropTypes.object,
 		activeColor: PropTypes.string,
+		disabledTap: PropTypes.bool,
 		...View.propTypes // include the default view properties
 	}
 };

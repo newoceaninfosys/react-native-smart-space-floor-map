@@ -38,10 +38,12 @@ public class CustomViewManager extends SimpleViewManager<CustomZoom> {
     private String _activeColor = "#ff0000";
     private int _radius = 1;
     private int _strokeWidth = 5;
+    private boolean _disabledTap = false;
 
     private void _drawDesks(CustomZoom zoom) {
         _copyBm = _buffer.copy(Bitmap.Config.ARGB_8888, true);
         _canvas = new Canvas(_copyBm);
+        _disabledTap = false;
 
         float activeDeskX = 0.0f, activeDeskY = 0.0f;
         if (_activeDesk != null) {
@@ -111,6 +113,11 @@ public class CustomViewManager extends SimpleViewManager<CustomZoom> {
         _zoom.setMyTouchHandler(new MyTouchHandler() {
             @Override
             public void onTouch(JSONObject obj) {
+
+                if (_disabledTap) {
+                    return;
+                }
+
                 // Callbacks
                 Double touchX = 0.0, touchY = 0.0;
                 try {
@@ -157,7 +164,7 @@ public class CustomViewManager extends SimpleViewManager<CustomZoom> {
                             WritableMap map = Arguments.createMap();
                             try {
                                 map = JsonConvert.jsonToReact(o);
-                            }catch(org.json.JSONException ex){
+                            } catch (org.json.JSONException ex) {
                                 System.out.println("Exception: " + ex);
                             }
                             context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
@@ -191,6 +198,11 @@ public class CustomViewManager extends SimpleViewManager<CustomZoom> {
     public void setRadius(CustomZoom zoom, int radius) {
         _radius = radius;
         this._drawDesks(zoom);
+    }
+
+    @ReactProp(name = "disabledTap")
+    public void setDisabledTap(CustomZoom zoom, boolean disabledTap) {
+        _disabledTap = disabledTap;
     }
 
     @ReactProp(name = "strokeWidth")
