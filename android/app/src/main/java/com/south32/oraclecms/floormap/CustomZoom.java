@@ -45,7 +45,7 @@ public class CustomZoom extends ImageView {
     float[] m;
 
     int viewWidth, viewHeight;
-    static final int CLICK = 3;
+    static final int CLICK = 10;
     float saveScale = 1f;
     protected float origWidth, origHeight;
     int oldMeasuredWidth, oldMeasuredHeight;
