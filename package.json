@@ -1,5 +1,5 @@
 {
-  "name": "smart-space-floor-map",
+  "name": "@nois/smart-space-floor-map",
   "version": "0.0.8",
   "description": "A floor map module for Smart Space App",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/sriraman/react-native-shared-preferences.git"
+    "url": "git+ssh://git@github.com/newoceaninfosys/react-native-smart-space-floor-map.git"
   },
   "keywords": [
     "React",
@@ -19,12 +19,16 @@
     "react-native"
   ],
   "author": "Shawn Dao <sang.dao@newoceaninfosys.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sriraman/react-native-shared-preferences/issues"
+    "url": "https://github.com/newoceaninfosys/react-native-smart-space-floor-map/issues"
   },
-  "homepage": "https://github.com/sriraman/react-native-shared-preferences#readme",
+  "homepage": "https://github.com/newoceaninfosys/react-native-smart-space-floor-map#readme",
   "dependencies": {
     "fs-extra": "^3.0.1"
-  }
+  },
+  "directories": {
+    "example": "example"
+  },
+  "devDependencies": {}
 }

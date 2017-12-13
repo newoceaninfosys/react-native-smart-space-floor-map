@@ -17,7 +17,7 @@ This project was started in the cause of solving issue Image Zooming and drawing
 Install package from npm
 
 ```sh
-npm install --save git+https://github.com/newoceaninfosys/react-native-smart-space-floor-map
+npm install --save @nois/smart-space-floor-map
 ```
 In App Gradle
 ```gradle

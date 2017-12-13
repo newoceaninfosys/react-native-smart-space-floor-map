@@ -1,0 +1,27 @@
+.*.swp
+._*
+.DS_Store
+.git
+.hg
+.npmrc
+.lock-wscript
+.svn
+.wafpickle-*
+config.gypi
+CVS
+npm-debug.log
+.idea
+
+# Code
+example/
+node_modules/
+package-lock.json
+release.js
+android/app
+android/gradle
+android/release_template
+android/build.gradle
+android/gradle.properties
+android/gradlew
+android/gradlew.bat
+android/settings.gradle
