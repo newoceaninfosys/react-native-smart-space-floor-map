@@ -1,6 +1,6 @@
 {
   "name": "@nois/smart-space-floor-map",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "A floor map module for Smart Space App",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/newoceaninfosys/react-native-smart-space-floor-map#readme",
   "dependencies": {
-    "fs-extra": "^3.0.1"
+    "fs-extra": "^3.0.1",
+    "prop-types": "^15.6.0"
   },
   "directories": {
     "example": "example"

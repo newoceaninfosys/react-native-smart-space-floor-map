@@ -6,7 +6,7 @@
 
 import { NativeModules } from 'react-native';
 // NativeModules.FloorMap;
-import { PropTypes } from 'react';
+import PropTypes from 'prop-types';
 import { requireNativeComponent, View } from 'react-native';
 
 var iface = {
